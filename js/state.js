@@ -1,22 +1,43 @@
  // Game state
 
-var state = {
+var level1 = {
+
+
     preload: function() {
-    	game.load.tilemap('map1', 'assets/BankMap1.json', null, Phaser.Tilemap.TILED_JSON);
-    	game.load.image('wallsAndFloor', 'assets/walls-and-floor-bank-1.png');
-  		game.load.image('grass', 'assets/grass-tiles-2-small.png');
-  		game.load.image('camera', 'assets/camera diagonal  (1).png');
-  		game.load.image('chair', 'assets/chair.png');
-  		game.load.image('hint', 'assets/Collision-Hint.png');
-  		game.load.image('desk', 'assets/Desk.png');
-  		game.load.image('money', 'assets/money.png');
-  		game.load.spritesheet('robber', 'assets/Robber.png', 'assets/Robber.json');
+        // load all assets and spritesheets
     },
 
     create: function(){
+        // set background
 
-      this.initTilemap();
-      cursors = game.input.keyboard.createCursorKeys();
+        // add phaser physics arcade
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        // create a group of walls
+        walls = game.add.group();
+
+        // enable physics for any object that is created in this group
+        walls.enableBody = true;
+
+        // build walls
+        // var ground = platforms.create(0, game.world.height - 64, 'ground');
+
+        // stop walls from falling away when collision occurs 
+        // ground.body.immovable = true;
+
+        // create a group of accessories (desk, chairs, grass)
+        accessories = game.add.group();
+
+        // enable physics for any object that is created in this group
+        accessories.enableBody = true;
+
+        // place accessories
+        // var ground = platforms.create(0, game.world.height - 64, 'ground');
+
+
+        
+
+        
     },
 
 	initTilemap: function(){
