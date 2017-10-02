@@ -1,7 +1,7 @@
 // main.js
 
 // Instantiate the game
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'mainDive');
+var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'mainDive');
 
 // Add game states
 game.state.add("level1", level1);
