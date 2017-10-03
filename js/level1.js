@@ -9,23 +9,26 @@ var level1 = {
         // This loads the tilemap from Tiled into phaser. To do this you must export
         // the tiled file as a .json file and then load the .json file as well as all of the
         // tile sets that come with it
-        game.load.tilemap('floor', 'assets/floor.json', null, Phaser.Tilemap.TILED_JSON);
-        game.load.image('woodenfloor', 'assets/woodenfloor.jpg');
+        game.load.tilemap('map1', 'assets/map1.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.image('terrain-assets', 'assets/terrain-assets.png');
 
     },
     create: function() {
-        // Set background
-        // Load the map.
-        map = this.game.add.tilemap('floor');
+        // Load the map
+        map = this.game.add.tilemap('map1');
         // Here we must add in all the tilesets that we used in our map.
         // the tileset must be named according to what it is named in the tiled editor
         // (i.e. what you saved/named the tileset as)
-        map.addTilesetImage('woodenfloor', 'woodenfloor');
+        map.addTilesetImage('terrain-assets', 'terrain-assets');
 
         // This resizes the tilemap in order to actually work in the browser
-        layer = map.createLayer('Floor');
-        layer.resizeWorld();
-        layer.wrap = true;
+        // the parameter is what the layer is ***called in tiled***
+        layer1 = map.createLayer('Floor');
+        layer2 = map.createLayer('WallsAccessories');
+        layer1.resizeWorld();
+        layer1.wrap = true;
+        layer2.resizeWorld();
+        layer2.wrap = true;
 
         // Add cursor keys in order to move around the map
         cursors = game.input.keyboard.createCursorKeys();
