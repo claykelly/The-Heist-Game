@@ -15,37 +15,37 @@ var level1 = {
 
     },
 
-    var map;
-
     create: function() {
+
         // Load the map
-        map = game.add.tilemap('map1');
+        var map = game.add.tilemap('map1');
+
         // Here we must add in all the tilesets that we used in our map.
         // the tileset must be named according to what it is named in the tiled editor
         // (i.e. what you saved/named the tileset as)
-        map.addTilesetImage('terrain-assets', 'terrain-assets');
-        map.addTilesetImage('accessories_tile', 'accessories_tile');
+        map.addTilesetImage('terrain-assets');
+        map.addTilesetImage('accessories_tile');
 
         // This resizes the tilemap in order to actually work in the browser
         // the parameter is what the layer is ***called in tiled***
-        var layer1 = map.createLayer('Floor');
-        var layer2 = map.createLayer('WallsAccessories');
+        var Floor = map.createLayer('Floor');
+        var WallsAccessories = map.createLayer('WallsAccessories');
 
-        map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
+        //map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
 
-        layer1.resizeWorld();
+        Floor.resizeWorld();
 
         // Add cursor keys in order to move around the map
         cursors = game.input.keyboard.createCursorKeys();
 
         // add phaser physics arcade
-        game.physics.startSystem(Phaser.Physics.ARCADE);
+        //game.physics.startSystem(Phaser.Physics.ARCADE);
 
         // create a group of walls
-        walls = game.add.group();
+        //walls = game.add.group();
 
         // enable physics for any object that is created in this group
-        walls.enableBody = true;
+        //walls.enableBody = true;
 
         // build walls
         // var ground = platforms.create(0, game.world.height - 64, 'ground');
