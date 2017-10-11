@@ -12,6 +12,7 @@ var level1 = {
         game.load.tilemap('map1', 'assets/map1.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('terrain-assets', 'assets/terrain-assets.png');
         game.load.image('accessories_tile', 'assets/accessories_tile.png');
+        game.load.spritesheet('robber', 'assets/robber.png', 32, 32);
 
     },
 
@@ -34,6 +35,13 @@ var level1 = {
         //map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
 
         Floor.resizeWorld();
+
+        // Add robber character
+        player = game.add.sprite(0, 0, 'robber');
+        player.frame = 13;
+
+        // Give robber physics
+        game.physics.arcade.enable(player);
 
         // Add cursor keys in order to move around the map
         cursors = game.input.keyboard.createCursorKeys();
@@ -62,24 +70,37 @@ var level1 = {
         // place accessories
         // var ground = platforms.create(0, game.world.height - 64, 'ground');
 
+        // Get camera to follow player
+        game.camera.follow(player);
+
     },
     update: function() {
         // Update function
 
-        // Cursor keys movement to move the camera for now. This is jsut so we can
-        // properly create the map
-        if (cursors.left.isDown) {
-            game.camera.x -= 8;
+        // *** Player Movement ***        
+        //  Reset the players velocity (movement)
+        player.body.velocity.x = 0;
+        player.body.velocity.y = 0;
+    
+        if (cursors.left.isDown)
+        {
+            //  Move to the left
+            player.body.velocity.x = -150;
         }
-        else if (cursors.right.isDown) {
-            game.camera.x += 8;
+        if (cursors.right.isDown)
+        {
+            //  Move to the right
+            player.body.velocity.x = 150;
         }
-
-        if (cursors.up.isDown) {
-            game.camera.y -= 8;
+        if (cursors.down.isDown) 
+        {
+            // Move down
+            player.body.velocity.y = 150;
         }
-        else if (cursors.down.isDown) {
-            game.camera.y += 8;
+        if (cursors.up.isDown) 
+        {
+            // Move up
+            player.body.velocity.y = -150;
         }
     }
 }
