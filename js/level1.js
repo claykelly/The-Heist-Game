@@ -82,7 +82,7 @@ var level1 = {
         // Update function
 
         // player collision
-        game.physics.aracde.collide(player, WallsAccessories);
+        game.physics.arcade.collide(player, WallsAccessories);
 
         // *** Player Movement ***        
         //  Reset the players velocity (movement)
