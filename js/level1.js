@@ -19,7 +19,7 @@ var level1 = {
     create: function() {
 
         // Load the map
-        var map = game.add.tilemap('map1');
+        map = game.add.tilemap('map1');
 
         // Here we must add in all the tilesets that we used in our map.
         // the tileset must be named according to what it is named in the tiled editor
@@ -29,10 +29,11 @@ var level1 = {
 
         // This resizes the tilemap in order to actually work in the browser
         // the parameter is what the layer is ***called in tiled***
-        var Floor = map.createLayer('Floor');
-        var WallsAccessories = map.createLayer('WallsAccessories');
+        Floor = map.createLayer('Floor');
+        WallsAccessories = map.createLayer('WallsAccessories');
 
-        //map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
+        // collision with walls and accessories
+        map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
 
         Floor.resizeWorld();
 
@@ -47,7 +48,10 @@ var level1 = {
         cursors = game.input.keyboard.createCursorKeys();
 
         // add phaser physics arcade
-        //game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        // game border collision
+        player.body.collideWorldBounds = true;
 
         // create a group of walls
         //walls = game.add.group();
@@ -62,10 +66,10 @@ var level1 = {
         // ground.body.immovable = true;
 
         // create a group of accessories (desk, chairs, grass)
-        accessories = game.add.group();
+        //accessories = game.add.group();
 
         // enable physics for any object that is created in this group
-        accessories.enableBody = true;
+        //accessories.enableBody = true;
 
         // place accessories
         // var ground = platforms.create(0, game.world.height - 64, 'ground');
@@ -76,6 +80,9 @@ var level1 = {
     },
     update: function() {
         // Update function
+
+        // player collision
+        game.physics.aracde.collide(player, WallsAccessories);
 
         // *** Player Movement ***        
         //  Reset the players velocity (movement)
