@@ -27,7 +27,6 @@ var level1 = {
         map.addTilesetImage('terrain-assets');
         map.addTilesetImage('accessories_tile');
 
-        // This resizes the tilemap in order to actually work in the browser
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
         WallsAccessories = map.createLayer('WallsAccessories');
@@ -38,11 +37,37 @@ var level1 = {
         Floor.resizeWorld();
 
         // Add robber character
-        player = game.add.sprite(0, 0, 'robber');
+        player = game.add.sprite(600, 600, 'robber');
         player.frame = 13;
 
         // Give robber physics
-        game.physics.arcade.enable(player);
+        game.physics.arcade.enable(player);        
+
+        // game border collision
+        player.body.collideWorldBounds = true;
+
+        // anchor player
+        player.anchor.setTo(0.5, 0.5);
+
+        // Get camera to follow player
+        game.camera.follow(player);
+
+        // Add a test security camera for detection testing
+        // We should make this into a function in order to make
+        // Multiple security guards easily
+        guards = game.add.group();
+        securityGuard = game.add.sprite(800, 600, 'robber');
+        securityGuard.frame = 0;
+        game.physics.arcade.enable(securityGuard);
+        guards.add(securityGuard);
+        securityGuard.body.velocity.y = 75;
+
+        // ***** Ray Casting ****** //
+        bitmap = game.add.bitmapData(3200, 3200);
+        bitmap.context.fillStyle = 'rgb(255, 255, 255)';
+        bitmap.context.strokeStyle = 'rgb(255, 255, 255)';
+        game.add.image(0, 0, bitmap);
+
 
         // Add cursor keys in order to move around the map
         cursors = game.input.keyboard.createCursorKeys();
@@ -50,39 +75,61 @@ var level1 = {
         // add phaser physics arcade
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        // game border collision
-        player.body.collideWorldBounds = true;
-
-        // create a group of walls
-        //walls = game.add.group();
-
-        // enable physics for any object that is created in this group
-        //walls.enableBody = true;
-
-        // build walls
-        // var ground = platforms.create(0, game.world.height - 64, 'ground');
-
-        // stop walls from falling away when collision occurs 
-        // ground.body.immovable = true;
-
-        // create a group of accessories (desk, chairs, grass)
-        //accessories = game.add.group();
-
-        // enable physics for any object that is created in this group
-        //accessories.enableBody = true;
-
-        // place accessories
-        // var ground = platforms.create(0, game.world.height - 64, 'ground');
-
-        // Get camera to follow player
-        game.camera.follow(player);
-
     },
     update: function() {
         // Update function
 
+        // Update the shadow texture each frame
+        // this.updateShadowTexture();
+
         // player collision
         game.physics.arcade.collide(player, WallsAccessories);
+
+
+
+        // ***** Ray Casting ***** //
+
+        // Clear the bitmap where we are drawing our lines
+        bitmap.context.clearRect(0, 0, 3200, 3200);
+
+        // Ray casting!
+        // Test if each camera can see the player by casting a ray (a line) towards the ball.
+        // If the ray intersects any walls before it intersects the ball then the wall
+        // is in the way.
+        guards.forEach(function(securityGuard) {
+            // Define a line that connects the person to the ball
+            // This isn't drawn on screen. This is just mathematical representation
+            // of a line to make our calculations easier. Unless you want to do a lot
+            // of math, make sure you choose an engine that has things like line intersection
+            // tests built in, like Phaser does.
+            var ray = new Phaser.Line(securityGuard.x, securityGuard.y, player.x + 16, player.y + 16);
+
+            // Test if any walls intersect the ray
+            var intersect = false;//this.getWallIntersection(ray);
+
+            if (ray.length > 200 ) {//&& intersect) {
+                // A wall is blocking this persons vision so change them back to their default color
+                securityGuard.tint = 0xffffff;
+            } else {
+                // This person can see the ball so change their color
+                securityGuard.tint = 0x0000ff;
+
+                // Draw a line from the ball to the person
+                bitmap.context.beginPath();
+                bitmap.context.moveTo(securityGuard.x + 16, securityGuard.y + 16);
+                bitmap.context.lineTo(player.x, player.y);
+                bitmap.context.stroke();
+            }
+        }, this);
+
+        // This just tells the engine it should update the texture cache
+        bitmap.dirty = true;
+
+        // for testing loop the "securityGuard" in a path      
+        if (securityGuard.body.velocity.y > 0 && securityGuard.y > 800 ||
+                securityGuard.body.velocity.y < 0 && securityGuard.y < 600) {
+            securityGuard.body.velocity.y *= -1; 
+        }
 
         // *** Player Movement ***        
         //  Reset the players velocity (movement)
@@ -92,22 +139,22 @@ var level1 = {
         if (cursors.left.isDown)
         {
             //  Move to the left
-            player.body.velocity.x = -150;
+            player.body.velocity.x = -500;
         }
         if (cursors.right.isDown)
         {
             //  Move to the right
-            player.body.velocity.x = 150;
+            player.body.velocity.x = 500;
         }
         if (cursors.down.isDown) 
         {
             // Move down
-            player.body.velocity.y = 150;
+            player.body.velocity.y = 500;
         }
         if (cursors.up.isDown) 
         {
             // Move up
-            player.body.velocity.y = -150;
+            player.body.velocity.y = -500;
         }
     }
 }
