@@ -12,7 +12,8 @@ var level1 = {
         game.load.tilemap('map1', 'assets/map1.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('terrain-assets', 'assets/terrain-assets.png');
         game.load.image('accessories_tile', 'assets/accessories_tile.png');
-        game.load.spritesheet('robber', 'assets/robber.png', 32, 32);
+        game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
+        game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
 
     },
 
@@ -38,10 +39,18 @@ var level1 = {
 
         // Add robber character
         player = game.add.sprite(600, 600, 'robber');
-        player.frame = 13;
-
+        player.frame = 0;
+        
         // Give robber physics
-        game.physics.arcade.enable(player);        
+        game.physics.arcade.enable(player); 
+
+        // Add animation to player
+        player.animations.add('down', [1, 2, 3, 4], 10, true);
+        player.animations.add('up', [14, 15, 16, 17], 10, true);
+        player.animations.add('right', [9, 10, 11, 12], 10, true);
+        player.animations.add('left', [5, 6, 7, 8], 10, true);
+        
+               
 
         // game border collision
         player.body.collideWorldBounds = true;
@@ -56,9 +65,10 @@ var level1 = {
         // We should make this into a function in order to make
         // Multiple security guards easily
         guards = game.add.group();
-        securityGuard = game.add.sprite(800, 600, 'robber');
+        securityGuard = game.add.sprite(800, 600, 'cop');
         securityGuard.frame = 0;
         game.physics.arcade.enable(securityGuard);
+        securityGuard.animations.add('down', [1, 2, 3, 4], 10, true);
         guards.add(securityGuard);
         securityGuard.body.velocity.y = 75;
 
@@ -129,6 +139,7 @@ var level1 = {
         if (securityGuard.body.velocity.y > 0 && securityGuard.y > 800 ||
                 securityGuard.body.velocity.y < 0 && securityGuard.y < 600) {
             securityGuard.body.velocity.y *= -1; 
+            securityGuard.animations.play('down');
         }
 
         // *** Player Movement ***        
@@ -140,21 +151,29 @@ var level1 = {
         {
             //  Move to the left
             player.body.velocity.x = -500;
+            player.animations.play('left');
         }
-        if (cursors.right.isDown)
+        else if (cursors.right.isDown)
         {
             //  Move to the right
             player.body.velocity.x = 500;
+            player.animations.play('right');
         }
-        if (cursors.down.isDown) 
+        else if (cursors.down.isDown) 
         {
             // Move down
             player.body.velocity.y = 500;
+            player.animations.play('down');
         }
-        if (cursors.up.isDown) 
+        else if (cursors.up.isDown) 
         {
             // Move up
             player.body.velocity.y = -500;
+            player.animations.play('up');
+        }
+        else {
+            player.animations.stop();
+            player.frame = 0;
         }
     }
 }
