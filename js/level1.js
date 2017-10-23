@@ -247,10 +247,11 @@ var level1 = {
                 bitmap.context.moveTo(guard.x + 16, guard.y + 16);
                 bitmap.context.lineTo(player.x, player.y);
                 bitmap.context.stroke();
-                // if (ray.length < 100) {
-                //     // GAME OVER
-                //     // Go to menu
-                // }
+                if (ray.length < 100) {
+                    // GAME OVER
+                    // Go to menu
+                    this.game.state.start("gameOver");
+                }
             }
         }, this);
 
