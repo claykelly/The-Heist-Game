@@ -12,11 +12,20 @@ var level1 = {
         game.load.tilemap('map1', 'assets/map1.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('terrain-assets', 'assets/terrain-assets.png');
         game.load.image('accessories_tile', 'assets/accessories_tile.png');
+        game.load.image('money', 'assets/money.png');
         game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
 
-    },
 
+    },
+    createMoney: function (x, y, group) {
+        // function to create money
+        // takes a x and y coordinate and
+        // a defined group to be inserted into
+        money = game.add.sprite(x, y, 'money');
+        money.anchor.setTo(0.5, 0.5);
+        group.add(money);
+    },
     create: function() {
 
         // *************** MAP *************** //
@@ -38,6 +47,37 @@ var level1 = {
 
         Floor.resizeWorld();
         // *************** MAP *************** //
+
+
+
+
+
+        // *************** ITEMS *************** //
+        items = game.add.group();
+        items.enableBody = true;
+
+        this.createMoney(1142, 1020, items);
+        this.createMoney(1142, 1176, items);
+        this.createMoney(1142, 1338, items);
+        this.createMoney(685, 2435, items);
+        this.createMoney(1168, 2435, items);
+        this.createMoney(1687, 2375, items);
+        this.createMoney(1977, 2375, items);
+        this.createMoney(1898, 1505, items);
+        this.createMoney(2090, 1505, items);
+        this.createMoney(2005, 858, items);
+        this.createMoney(2960, 417, items);
+        this.createMoney(2960, 675, items);
+        this.createMoney(2722, 1915, items);
+        this.createMoney(2722, 2532, items);
+        this.createMoney(2320, 2908, items);
+
+        moneyCount = 15;
+        scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#ffffff' });
+        scoreText.fixedToCamera = true;
+        scoreText.cameraOffset.setTo(0, 0);
+
+        // *************** ITEMS *************** //
 
 
 
@@ -194,7 +234,6 @@ var level1 = {
 
 
 
-
         // *************** RAYCASTING *************** //
         bitmap = game.add.bitmapData(3200, 3200);
         bitmap.context.fillStyle = 'rgb(255, 255, 255)';
@@ -210,11 +249,30 @@ var level1 = {
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
     },
+    collectMoney: function(player, money) {
+        // collect money in the game
+
+        // Removes the money from the screen
+        money.kill();
+    
+        //  Add and update the score
+        moneyCount -= 1;
+        scoreText.text = 'Money Left: ' + moneyCount;
+    
+        if (moneyCount === 0) {
+            this.game.state.start("mainMenu");
+        }
+
+
+    },
     update: function() {
         // Update function
 
         // player collision
         game.physics.arcade.collide(player, WallsAccessories);
+
+        game.physics.arcade.overlap(player, items, this.collectMoney, null, this);
+
 
         // *************** RAY CASTING *************** //
         // Clear the bitmap where we are drawing our lines
@@ -247,7 +305,7 @@ var level1 = {
                 bitmap.context.moveTo(guard.x + 16, guard.y + 16);
                 bitmap.context.lineTo(player.x, player.y);
                 bitmap.context.stroke();
-                if (ray.length < 100) {
+                if (ray.length < 150) {
                     // GAME OVER
                     // Go to menu
                     this.game.state.start("gameOver");
