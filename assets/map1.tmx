@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="4">
  <tileset firstgid="1" name="terrain-assets" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="terrain-assets.png" width="1024" height="1024"/>
  </tileset>
@@ -214,4 +214,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="ObjectLayer">
+  <object id="1" gid="1035" x="455.932" y="1153.61" width="32" height="32"/>
+  <object id="2" gid="1035" x="515.545" y="1178.44" width="32" height="32"/>
+  <object id="3" gid="1035" x="386.385" y="1188.38" width="32" height="32"/>
+ </objectgroup>
 </map>

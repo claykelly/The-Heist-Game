@@ -53,7 +53,9 @@ var level1 = {
 
 
         // *************** ITEMS *************** //
-        items = game.add.group();
+        
+        
+        /*items = game.add.group();
         items.enableBody = true;
 
         this.createMoney(1142, 1020, items);
@@ -70,16 +72,18 @@ var level1 = {
         this.createMoney(2960, 675, items);
         this.createMoney(2722, 1915, items);
         this.createMoney(2722, 2532, items);
-        this.createMoney(2320, 2908, items);
+        this.createMoney(2320, 2908, items);*/
 
         moneyCount = 15;
         scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#ffffff' });
         scoreText.fixedToCamera = true;
         scoreText.cameraOffset.setTo(0, 0);
 
-        // *************** ITEMS *************** //
 
-
+        items = game.add.group();
+        items.enableBody = true;
+        
+        map.createFromObjects('ObjectLayer', 1035, 'money', 0, true, false, items);
 
 
         // *************** PLAYER *************** //
@@ -443,19 +447,19 @@ var level1 = {
             player.body.velocity.x = -500;
             player.animations.play('left');
         }
-        else if (cursors.right.isDown)
+        if (cursors.right.isDown)
         {
             //  Move to the right
             player.body.velocity.x = 500;
             player.animations.play('right');
         }
-        else if (cursors.down.isDown) 
+        if (cursors.down.isDown) 
         {
             // Move down
             player.body.velocity.y = 500;
             player.animations.play('down');
         }
-        else if (cursors.up.isDown) 
+        if (cursors.up.isDown) 
         {
             // Move up
             player.body.velocity.y = -500;
