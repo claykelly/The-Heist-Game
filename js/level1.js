@@ -149,28 +149,32 @@ var level1 = {
             // of math, make sure you choose an engine that has things like line intersection
             // tests built in, like Phaser does.
             var ray = new Phaser.Line(guard.x, guard.y, player.x + 16, player.y + 16);
+            //game.physics.arcade.collide(ray, WallsAccessories);
 
             // Test if any walls intersect the ray
-            var intersect = false;//this.getWallIntersection(ray);
+            var tileHits = WallsAccessories.getRayCastTiles(ray, 4, false, false);
 
-            if (ray.length > 200) {//&& intersect) {
-                // A wall is blocking this persons vision so change them back to their default color
+            if (tileHits.length > 0 || ray.length > 200) {
+                // A wall is blocking this guards vision so change them back to their default color
                 guard.tint = 0xffffff;
             } else {
-                // This person can see the player so change their color
+                // This guard can see the player so change their color            
                 guard.tint = 0x0000ff;
 
-                // Draw a line from the ball to the person
+                // Draw a line from the guard to the robber
                 bitmap.context.beginPath();
                 bitmap.context.moveTo(guard.x + 16, guard.y + 16);
                 bitmap.context.lineTo(player.x, player.y);
                 bitmap.context.stroke();
+
+                // Player is too close to the guard so they are "caught"
                 if (ray.length < 150) {
                     // GAME OVER
                     // Go to menu
                     this.game.state.start("gameOver");
-                }
+                }          
             }
+
         }, this);
 
         // This just tells the engine it should update the texture cache
