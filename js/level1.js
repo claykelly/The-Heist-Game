@@ -175,6 +175,10 @@ var level1 = {
                 }          
             }
 
+            // *************** GUARDS MOVEMENT *************** //
+            this.moveGuard(guard);
+            // *************** GUARDS MOVEMENT *************** //
+
         }, this);
 
         // This just tells the engine it should update the texture cache
@@ -183,49 +187,64 @@ var level1 = {
 
 
 
-
-        // *************** GUARDS MOVEMENT *************** //
-
-        guards.forEach(function(guard) {
-            
-            this.moveGuard(guard);
-
-        }, this);
-        // *************** GUARDS MOVEMENT *************** //
-
-
-
-
-
         // *************** PLAYER MOVEMENT *************** //
         //  Reset the players velocity (movement)
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
-    
-        if (cursors.left.isDown)
+        
+        // Move up and right
+        if (cursors.up.isDown && cursors.right.isDown) 
         {
-            //  Move to the left
+            player.body.velocity.y = -250;
+            player.body.velocity.x = 250;
+            player.animations.play('up');
+        }
+        // Move up and left
+        else if (cursors.up.isDown && cursors.left.isDown) 
+        {
+            player.body.velocity.y = -250;
+            player.body.velocity.x = -250;
+            player.animations.play('up');
+        }
+        // Move down and right
+        else if (cursors.down.isDown && cursors.right.isDown) 
+        {
+            player.body.velocity.y = 250;
+            player.body.velocity.x = 250;
+            player.animations.play('down');
+        }
+        // Move down and left
+        else if (cursors.down.isDown && cursors.left.isDown) 
+        {
+            player.body.velocity.y = 250;
+            player.body.velocity.x = -250;
+            player.animations.play('down');
+        }
+        // Move left
+        else if (cursors.left.isDown)
+        {
             player.body.velocity.x = -250;
             player.animations.play('left');
         }
-        if (cursors.right.isDown)
+        // Move right
+        else if (cursors.right.isDown)
         {
-            //  Move to the right
             player.body.velocity.x = 250;
             player.animations.play('right');
         }
-        if (cursors.down.isDown) 
+        // Move down
+        else if (cursors.down.isDown) 
         {
-            // Move down
             player.body.velocity.y = 250;
             player.animations.play('down');
         }
-        if (cursors.up.isDown) 
+        // Move up
+        else if (cursors.up.isDown) 
         {
-            // Move up
             player.body.velocity.y = -250;
             player.animations.play('up');
         }
+        // Standing still
         else {
             player.animations.stop();
             player.frame = 0;
