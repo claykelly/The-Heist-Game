@@ -52,10 +52,10 @@ var level1 = {
         items = game.add.group();
         items.enableBody = true;
         
-        // creates money from tiled map, the "1035" is the grid: property ID from the map1.JASON file
+        // creates money from tiled map, the "1047" is the grid: property ID from the map1.JASON file
         // it selects all the object we placed down that are "cops" keep everything else
         // the same to add new objects except obviously the group
-        map.createFromObjects('ObjectLayer', 1035, 'money', 0, true, false, items);
+        map.createFromObjects('ObjectLayer', 1047, 'money', 0, true, false, items);
 
         // count how many dollars are on the map for the game over condition
         items.forEach( function(item) {
@@ -102,7 +102,7 @@ var level1 = {
         guards = game.add.group();
         guards.enableBody = true;
 
-        map.createFromObjects('ObjectLayer', 1029, 'cop', 0, true, false, guards);
+        map.createFromObjects('ObjectLayer', 1041, 'cop', 0, true, false, guards);
 
         // the guards are already placed by tiled we just need to set each guard's velocity
         this.createGuards(guards);
