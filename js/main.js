@@ -8,6 +8,7 @@ game.state.add("mainMenu", mainMenu);
 game.state.add("gameOver", gameOver);
 game.state.add("level1", level1);
 
+
 // create global variables 
 var cursors;
 
