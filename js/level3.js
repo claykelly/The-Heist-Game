@@ -173,6 +173,7 @@ var level3 = {
                 if (ray.length < 150) {
                     // GAME OVER
                     // Go to menu
+                    game.currentLevel = "level3";
                     this.game.state.start("gameOver");
                 }          
             }
@@ -267,7 +268,7 @@ var level3 = {
         scoreText.text = 'Money Left: ' + moneyCount;
 
         if (moneyCount === 0) {
-            this.game.state.start("mainMenu");
+            this.game.state.start("winScreen");
         }
     },
     createGuards: function(group) {

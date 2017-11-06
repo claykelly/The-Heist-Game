@@ -17,6 +17,6 @@ var mainMenu = {
         topMessage2.anchor.setTo(0.5,0.5);
     },    
     playTheGame: function(){
-        this.game.state.start("level3");
+        this.game.state.start("level1");
     }
 }

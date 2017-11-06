@@ -171,6 +171,7 @@ var level1 = {
                 if (ray.length < 150) {
                     // GAME OVER
                     // Go to menu
+                    game.currentLevel = "level1";
                     this.game.state.start("gameOver");
                 }          
             }
@@ -265,7 +266,7 @@ var level1 = {
         scoreText.text = 'Money Left: ' + moneyCount;
 
         if (moneyCount === 0) {
-            this.game.state.start("mainMenu");
+            this.game.state.start("level2");
         }
     },
     createGuards: function(group) {
