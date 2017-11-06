@@ -5,7 +5,7 @@ var mainMenu = {
         game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
     },
     create: function() {
-        game.stage.backgroundColor = "#222222"
+        game.stage.backgroundColor = "#888888"
 
 		var playButton = this.game.add.button(window.innerWidth / 2,window.innerHeight / 2, "robber", this.playTheGame, this);
         playButton.anchor.setTo(0.5,0.5);

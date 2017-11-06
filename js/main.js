@@ -4,6 +4,7 @@
 var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, '');
 
 // Add game states
+game.state.add("load", load);
 game.state.add("mainMenu", mainMenu);
 game.state.add("gameOver", gameOver);
 game.state.add("level1", level1);
@@ -14,4 +15,4 @@ var cursors;
 
 // start the the first state
 // each state will end by going to another state after this point
-game.state.start("mainMenu");
+game.state.start("load");
