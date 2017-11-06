@@ -15,6 +15,9 @@ var load = {
 
         game.add.tween(sprite).to( { alpha: 1}, 2000, Phaser.Easing.Linear.None, true, 0, 0, false);
 
+        var style = { fill: "#ffffff", align: "center" };
+        var message = this.game.add.text(window.innerWidth / 2 - 50,window.innerHeight / 2 - 250, "Click to start", style);
+
     },    
 
     startgame: function(){

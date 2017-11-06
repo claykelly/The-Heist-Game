@@ -8,6 +8,8 @@ game.state.add("load", load);
 game.state.add("mainMenu", mainMenu);
 game.state.add("gameOver", gameOver);
 game.state.add("level1", level1);
+game.state.add("level2", level2);
+game.state.add("level3", level3);
 
 
 // create global variables 
