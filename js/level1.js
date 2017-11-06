@@ -280,10 +280,18 @@ var level1 = {
             // set guard velocity
             if (guard.verticalPatrol) {
                 guard.body.velocity.y = guard.velocity;
-                guard.animations.play('down');
+                if (guard.velocity > 0) {
+                    guard.animations.play('down');
+                } else {
+                    guard.animations.play('up');
+                }
             } else {
                 guard.body.velocity.x = guard.velocity;
-                guard.animations.play('right');
+                if (guard.velocity > 0) {
+                    guard.animations.play('right');
+                } else {
+                    guard.animations.play('left');
+                }
             }
         }, this);   
     },
