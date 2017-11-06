@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="29">
  <tileset firstgid="1" name="terrain-assets" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
   <image source="terrain-assets.png" width="1024" height="1024"/>
  </tileset>
@@ -217,5 +217,132 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="ObjectLayer"/>
+ <objectgroup name="ObjectLayer">
+  <object id="1" name="guard1" gid="170" x="940.746" y="775.129" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="1600"/>
+    <property name="leftX" type="float" value="0"/>
+    <property name="rightX" type="float" value="0"/>
+    <property name="topY" type="float" value="775.13"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="2" name="guard2" gid="170" x="1000.4" y="2074.7" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="0"/>
+    <property name="leftX" type="float" value="1000.4"/>
+    <property name="rightX" type="float" value="2184"/>
+    <property name="topY" type="float" value="0"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="3" name="guard3" gid="170" x="604.778" y="2451.03" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="0"/>
+    <property name="leftX" type="float" value="604.78"/>
+    <property name="rightX" type="float" value="1900"/>
+    <property name="topY" type="float" value="0"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="4" name="guard4" gid="170" x="2196.93" y="1827.04" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="0"/>
+    <property name="leftX" type="float" value="2196.93"/>
+    <property name="rightX" type="float" value="2770"/>
+    <property name="topY" type="float" value="0"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="5" name="guard5" gid="170" x="1158.01" y="710.922" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="0"/>
+    <property name="leftX" type="float" value="1158.01"/>
+    <property name="rightX" type="float" value="2680"/>
+    <property name="topY" type="float" value="0"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="6" name="guard6" gid="170" x="1721.61" y="1418.61" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="0"/>
+    <property name="leftX" type="float" value="1721.61"/>
+    <property name="rightX" type="float" value="2440"/>
+    <property name="topY" type="float" value="0"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="7" name="guard7" gid="170" x="1463.54" y="936.737" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="1615"/>
+    <property name="leftX" type="float" value="0"/>
+    <property name="rightX" type="float" value="0"/>
+    <property name="topY" type="float" value="936.74"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="8" name="guard9" gid="170" x="1525.88" y="99.1832" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="0"/>
+    <property name="leftX" type="float" value="1525.88"/>
+    <property name="rightX" type="float" value="2715"/>
+    <property name="topY" type="float" value="0"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="9" name="guard8" gid="170" x="2685.57" y="504.942" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="0"/>
+    <property name="leftX" type="float" value="1525.88"/>
+    <property name="rightX" type="float" value="2715"/>
+    <property name="topY" type="float" value="0"/>
+    <property name="velocity" type="float" value="-75"/>
+    <property name="verticalPatrol" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="10" name="guard10" gid="170" x="2693.42" y="1761.49" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="1761.49"/>
+    <property name="leftX" type="float" value="0"/>
+    <property name="rightX" type="float" value="0"/>
+    <property name="topY" type="float" value="715"/>
+    <property name="velocity" type="float" value="-75"/>
+    <property name="verticalPatrol" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="11" name="guard11" gid="170" x="3009.27" y="433.186" width="32" height="32">
+   <properties>
+    <property name="bottomY" type="float" value="693"/>
+    <property name="leftX" type="float" value="0"/>
+    <property name="rightX" type="float" value="0"/>
+    <property name="topY" type="float" value="433.19"/>
+    <property name="velocity" type="float" value="75"/>
+    <property name="verticalPatrol" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="12" name="money1" gid="971" x="550.479" y="751.019" width="32" height="32"/>
+  <object id="13" name="money2" gid="971" x="887.558" y="107.292" width="32" height="32"/>
+  <object id="14" name="money3" gid="971" x="564.524" y="1996.34" width="32" height="32"/>
+  <object id="15" name="money4" gid="971" x="1650.67" y="2452.8" width="32" height="32"/>
+  <object id="16" name="money5" gid="971" x="784.562" y="2473.87" width="32" height="32"/>
+  <object id="17" name="money6" gid="971" x="1189.52" y="1296.43" width="32" height="32"/>
+  <object id="18" name="money7" gid="971" x="1182.5" y="982.76" width="32" height="32"/>
+  <object id="19" name="money8" gid="971" x="1191.87" y="1579.67" width="32" height="32"/>
+  <object id="20" name="money9" gid="971" x="2268.64" y="1010.85" width="32" height="32"/>
+  <object id="21" name="money10" gid="971" x="1533.63" y="1848.87" width="32" height="32"/>
+  <object id="22" name="money11" gid="971" x="1905.82" y="1851.21" width="32" height="32"/>
+  <object id="23" name="money12" gid="971" x="2584.66" y="2352.14" width="32" height="32"/>
+  <object id="24" name="money13" gid="971" x="3015.37" y="163.472" width="32" height="32"/>
+  <object id="25" name="money14" gid="971" x="2998.98" y="935.944" width="32" height="32"/>
+  <object id="26" name="money15" gid="971" x="1938.59" y="238.378" width="32" height="32"/>
+  <object id="27" name="money16" gid="971" x="2189.06" y="381.169" width="32" height="32"/>
+ </objectgroup>
 </map>

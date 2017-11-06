@@ -30,7 +30,7 @@ var level3 = {
         // the tileset must be named according to what it is named in the tiled editor
         // (i.e. what you saved/named the tileset as)
         map.addTilesetImage('terrain-assets');
-        map.addTilesetImage('accessories_tile');
+        //map.addTilesetImage('accessories_tile');
         map.addTilesetImage('2dwalls');
         map.addTilesetImage('extra');
 
@@ -49,24 +49,24 @@ var level3 = {
 
 
         // *************** ITEMS *************** //
-        // moneyCount = 0;
+        moneyCount = 0;
 
-        // items = game.add.group();
-        // items.enableBody = true;
+        items = game.add.group();
+        items.enableBody = true;
         
-        // // creates money from tiled map, the "1047" is the grid: property ID from the map1.JASON file
-        // // it selects all the object we placed down that are "cops" keep everything else
-        // // the same to add new objects except obviously the group
-        // map.createFromObjects('ObjectLayer', 1047, 'money', 0, true, false, items);
+        // creates money from tiled map, the "1047" is the grid: property ID from the map1.JASON file
+        // it selects all the object we placed down that are "cops" keep everything else
+        // the same to add new objects except obviously the group
+        map.createFromObjects('ObjectLayer', 971, 'money', 0, true, false, items);
 
-        // // count how many dollars are on the map for the game over condition
-        // items.forEach( function(item) {
-        //     moneyCount += 1;
-        // }, this);
+        // count how many dollars are on the map for the game over condition
+        items.forEach( function(item) {
+            moneyCount += 1;
+        }, this);
 
-        // scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#ffffff' });
-        // scoreText.fixedToCamera = true;
-        // scoreText.cameraOffset.setTo(0, 0);
+        scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#ffffff' });
+        scoreText.fixedToCamera = true;
+        scoreText.cameraOffset.setTo(0, 0);
         // *************** ITEMS *************** //
 
 
@@ -98,16 +98,16 @@ var level3 = {
 
 
         // *************** GUARDS *************** //
-        // // Add test security guards for detection testing
-        // // We should make this into a function in order to make
-        // // Multiple security guards easily
-        // guards = game.add.group();
-        // guards.enableBody = true;
+        // Add test security guards for detection testing
+        // We should make this into a function in order to make
+        // Multiple security guards easily
+        guards = game.add.group();
+        guards.enableBody = true;
 
-        // map.createFromObjects('ObjectLayer', 1041, 'cop', 0, true, false, guards);
+        map.createFromObjects('ObjectLayer', 170, 'cop', 0, true, false, guards);
 
-        // // the guards are already placed by tiled we just need to set each guard's velocity
-        // this.createGuards(guards);
+        // the guards are already placed by tiled we just need to set each guard's velocity
+        this.createGuards(guards);
         // *************** GUARDS *************** //
 
 
@@ -133,7 +133,7 @@ var level3 = {
         // player collision
         game.physics.arcade.collide(player, WallsAccessories);
 
-        //game.physics.arcade.overlap(player, items, this.collectMoney, null, this);
+        game.physics.arcade.overlap(player, items, this.collectMoney, null, this);
 
 
         // *************** RAY CASTING *************** //
@@ -144,44 +144,44 @@ var level3 = {
         // Test if each camera can see the player by casting a ray (a line) towards the ball.
         // If the ray intersects any walls before it intersects the ball then the wall
         // is in the way.
-        // guards.forEach(function(guard) {
-        //     // Define a line that connects the person to the ball
-        //     // This isn't drawn on screen. This is just mathematical representation
-        //     // of a line to make our calculations easier. Unless you want to do a lot
-        //     // of math, make sure you choose an engine that has things like line intersection
-        //     // tests built in, like Phaser does.
-        //     var ray = new Phaser.Line(guard.x, guard.y, player.x + 16, player.y + 16);
-        //     //game.physics.arcade.collide(ray, WallsAccessories);
+        guards.forEach(function(guard) {
+            // Define a line that connects the person to the ball
+            // This isn't drawn on screen. This is just mathematical representation
+            // of a line to make our calculations easier. Unless you want to do a lot
+            // of math, make sure you choose an engine that has things like line intersection
+            // tests built in, like Phaser does.
+            var ray = new Phaser.Line(guard.x, guard.y, player.x + 16, player.y + 16);
+            //game.physics.arcade.collide(ray, WallsAccessories);
 
-        //     // Test if any walls intersect the ray
-        //     var tileHits = WallsAccessories.getRayCastTiles(ray, 4, false, false);
+            // Test if any walls intersect the ray
+            var tileHits = WallsAccessories.getRayCastTiles(ray, 4, false, false);
 
-        //     if (tileHits.length > 0 || ray.length > 200) {
-        //         // A wall is blocking this guards vision so change them back to their default color
-        //         guard.tint = 0xffffff;
-        //     } else {
-        //         // This guard can see the player so change their color            
-        //         guard.tint = 0x0000ff;
+            if (tileHits.length > 0 || ray.length > 200) {
+                // A wall is blocking this guards vision so change them back to their default color
+                guard.tint = 0xffffff;
+            } else {
+                // This guard can see the player so change their color            
+                guard.tint = 0x0000ff;
 
-        //         // Draw a line from the guard to the robber
-        //         bitmap.context.beginPath();
-        //         bitmap.context.moveTo(guard.x + 16, guard.y + 16);
-        //         bitmap.context.lineTo(player.x, player.y);
-        //         bitmap.context.stroke();
+                // Draw a line from the guard to the robber
+                bitmap.context.beginPath();
+                bitmap.context.moveTo(guard.x + 16, guard.y + 16);
+                bitmap.context.lineTo(player.x, player.y);
+                bitmap.context.stroke();
 
-        //         // Player is too close to the guard so they are "caught"
-        //         if (ray.length < 150) {
-        //             // GAME OVER
-        //             // Go to menu
-        //             this.game.state.start("gameOver");
-        //         }          
-        //     }
+                // Player is too close to the guard so they are "caught"
+                if (ray.length < 150) {
+                    // GAME OVER
+                    // Go to menu
+                    this.game.state.start("gameOver");
+                }          
+            }
 
-        //     // *************** GUARDS MOVEMENT *************** //
-        //     this.moveGuard(guard);
-        //     // *************** GUARDS MOVEMENT *************** //
+            // *************** GUARDS MOVEMENT *************** //
+            this.moveGuard(guard);
+            // *************** GUARDS MOVEMENT *************** //
 
-        // }, this);
+        }, this);
 
         // This just tells the engine it should update the texture cache
         bitmap.dirty = true;
@@ -282,10 +282,18 @@ var level3 = {
             // set guard velocity
             if (guard.verticalPatrol) {
                 guard.body.velocity.y = guard.velocity;
-                guard.animations.play('down');
+                if (guard.velocity > 0) {
+                    guard.animations.play('down');
+                } else {
+                    guard.animations.play('up');
+                }
             } else {
                 guard.body.velocity.x = guard.velocity;
-                guard.animations.play('right');
+                if (guard.velocity > 0) {
+                    guard.animations.play('right');
+                } else {
+                    guard.animations.play('left');
+                }
             }
         }, this);   
     },
