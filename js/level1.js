@@ -118,6 +118,19 @@ var level1 = {
         // *************** RAYCASTING *************** //
 
 
+        // *************** SHADOW *************** //
+        // Create the shadow texture
+        this.shadowTexture = this.game.add.bitmapData(3200, 3200);
+
+        // Create an object that will use the bitmap as a texture
+        var lightSprite = this.game.add.image(0, 0, this.shadowTexture);
+
+        // Set the blend mode to MULTIPLY. This will darken the colors of
+        // everything below this sprite.
+        lightSprite.blendMode = Phaser.blendModes.MULTIPLY;
+        // *************** SHADOW *************** //
+
+
         // Add cursor keys in order to move around the map
         cursors = game.input.keyboard.createCursorKeys();
 
@@ -138,6 +151,10 @@ var level1 = {
         // Clear the bitmap where we are drawing our lines
         bitmap.context.clearRect(0, 0, 3200, 3200);
 
+        // Draw shadow
+        this.shadowTexture.context.fillStyle = 'rgb(175, 175, 175)';
+        this.shadowTexture.context.fillRect(0, 0, 3200, 3200);
+
         // Ray casting!
         // Test if each camera can see the player by casting a ray (a line) towards the ball.
         // If the ray intersects any walls before it intersects the ball then the wall
@@ -154,9 +171,11 @@ var level1 = {
             // Test if any walls intersect the ray
             var tileHits = WallsAccessories.getRayCastTiles(ray, 4, false, false);
 
-            if (tileHits.length > 0 || ray.length > 200) {
-                // A wall is blocking this guards vision so change them back to their default color
+            if (tileHits.length > 0 || ray.length > 300) {
+                // A wall is blocking this guards vision or the player is too far
                 guard.tint = 0xffffff;
+
+
             } else {
                 // This guard can see the player so change their color            
                 guard.tint = 0x0000ff;
@@ -166,6 +185,9 @@ var level1 = {
                 bitmap.context.moveTo(guard.x + 16, guard.y + 16);
                 bitmap.context.lineTo(player.x, player.y);
                 bitmap.context.stroke();
+
+                this.updateShadowTexture(guard);
+
 
                 // Player is too close to the guard so they are "caught"
                 if (ray.length < 150) {
@@ -313,5 +335,22 @@ var level1 = {
             guard.body.velocity.x > 0 ? guard.animations.play('right') : guard.animations.play('left');
             }
         }
+    },
+    updateShadowTexture: function(guard) {
+        // This function updates the shadow texture (this.shadowTexture).
+        // First, it fills the entire texture with a dark shadow color.
+        // Then it draws a white circle centered on the pointer position.
+        // Because the texture is drawn to the screen using the MULTIPLY
+        // blend mode, the dark areas of the texture make all of the colors
+        // underneath it darker, while the white area is unaffected.
+
+        // Draw circle of light
+        this.shadowTexture.context.beginPath();
+        this.shadowTexture.context.fillStyle = 'rgb(255, 255, 255)';
+        this.shadowTexture.context.arc(guard.x + 16, guard.y + 16, 100, 0, Math.PI*2);
+        this.shadowTexture.context.fill();
+
+        // This just tells the engine it should update the texture cache
+        this.shadowTexture.dirty = true;
     }
 }
