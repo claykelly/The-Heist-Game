@@ -13,6 +13,7 @@ var level1 = {
         game.load.image('terrain-assets', 'assets/terrain-assets.png');
         game.load.image('accessories_tile', 'assets/accessories_tile.png');
         game.load.image('2dwalls', 'assets/2dwalls.png');
+        game.load.image('extra', 'assets/extra.png');
         game.load.image('money', 'assets/money.png');
         game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
@@ -31,6 +32,7 @@ var level1 = {
         map.addTilesetImage('terrain-assets');
         map.addTilesetImage('accessories_tile');
         map.addTilesetImage('2dwalls');
+        map.addTilesetImage('extra');
 
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
