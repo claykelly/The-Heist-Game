@@ -192,12 +192,6 @@ var level1 = {
                 // This guard can see the player
                 guard.playerSeen = true;
 
-                // Draw a line from the guard to the robber
-                // bitmap.context.beginPath();
-                // bitmap.context.moveTo(guard.x, guard.y);
-                // bitmap.context.lineTo(player.x, player.y);
-                // bitmap.context.stroke();
-
                 // draw guards vision circle
                 this.updateShadowTexture(guard);
 
