@@ -165,7 +165,7 @@ var level1 = {
             // of a line to make our calculations easier. Unless you want to do a lot
             // of math, make sure you choose an engine that has things like line intersection
             // tests built in, like Phaser does.
-            var ray = new Phaser.Line(guard.x, guard.y, player.x + 16, player.y + 16);
+            var ray = new Phaser.Line(guard.x, guard.y, player.x, player.y);
             //game.physics.arcade.collide(ray, WallsAccessories);
 
             // Test if any walls intersect the ray
@@ -173,19 +173,30 @@ var level1 = {
 
             if (tileHits.length > 0 || ray.length > 300) {
                 // A wall is blocking this guards vision or the player is too far
-                guard.tint = 0xffffff;
+                if (guard.playerSeen) {
+
+                    // Change guard back to not seein player so that we know to clear the
+                    // guards vision circle
+                    guard.playerSeen = false;
+
+                    // Re-draw shadow to clear old guard vision
+                    this.shadowTexture.context.fillStyle = 'rgb(175, 175, 175)';
+                    this.shadowTexture.context.fillRect(0, 0, 3200, 3200);
+                    this.shadowTexture.dirty = true;
+                }
 
 
             } else {
-                // This guard can see the player so change their color            
-                guard.tint = 0x0000ff;
+                // This guard can see the player
+                guard.playerSeen = true;
 
                 // Draw a line from the guard to the robber
-                bitmap.context.beginPath();
-                bitmap.context.moveTo(guard.x + 16, guard.y + 16);
-                bitmap.context.lineTo(player.x, player.y);
-                bitmap.context.stroke();
+                // bitmap.context.beginPath();
+                // bitmap.context.moveTo(guard.x, guard.y);
+                // bitmap.context.lineTo(player.x, player.y);
+                // bitmap.context.stroke();
 
+                // draw guards vision circle
                 this.updateShadowTexture(guard);
 
 
@@ -300,6 +311,8 @@ var level1 = {
             guard.animations.add('left', [5, 6, 7, 8], 10, true);
             guard.animations.add('right', [9, 10, 11, 12], 10, true);
 
+            guard.anchor.setTo(0.5, 0.5);
+
             // set guard velocity
             if (guard.verticalPatrol) {
                 guard.body.velocity.y = guard.velocity;
@@ -347,7 +360,7 @@ var level1 = {
         // Draw circle of light
         this.shadowTexture.context.beginPath();
         this.shadowTexture.context.fillStyle = 'rgb(255, 255, 255)';
-        this.shadowTexture.context.arc(guard.x + 16, guard.y + 16, 100, 0, Math.PI*2);
+        this.shadowTexture.context.arc(guard.x, guard.y, 140, 0, Math.PI*2);
         this.shadowTexture.context.fill();
 
         // This just tells the engine it should update the texture cache
