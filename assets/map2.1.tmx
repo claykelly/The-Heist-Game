@@ -219,6 +219,7 @@
    <properties>
     <property name="bottomY" type="float" value="0"/>
     <property name="leftX" type="float" value="680"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="2250"/>
     <property name="topY" type="float" value="0"/>
     <property name="velocity" type="float" value="75"/>
@@ -229,6 +230,7 @@
    <properties>
     <property name="bottomY" type="float" value="0"/>
     <property name="leftX" type="float" value="680"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="2250"/>
     <property name="topY" type="float" value="0"/>
     <property name="velocity" type="float" value="75"/>
@@ -239,6 +241,7 @@
    <properties>
     <property name="bottomY" type="float" value="0"/>
     <property name="leftX" type="float" value="680"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="2250"/>
     <property name="topY" type="float" value="0"/>
     <property name="velocity" type="float" value="-75"/>
@@ -249,6 +252,7 @@
    <properties>
     <property name="bottomY" type="float" value="0"/>
     <property name="leftX" type="float" value="146.41"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="873"/>
     <property name="topY" type="float" value="0"/>
     <property name="velocity" type="float" value="75"/>
@@ -259,6 +263,7 @@
    <properties>
     <property name="bottomY" type="float" value="2720"/>
     <property name="leftX" type="float" value="0"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="0"/>
     <property name="topY" type="float" value="1620"/>
     <property name="velocity" type="float" value="75"/>
@@ -269,6 +274,7 @@
    <properties>
     <property name="bottomY" type="float" value="2245"/>
     <property name="leftX" type="float" value="0"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="0"/>
     <property name="topY" type="float" value="1601.28"/>
     <property name="velocity" type="float" value="75"/>
@@ -279,6 +285,7 @@
    <properties>
     <property name="bottomY" type="float" value="0"/>
     <property name="leftX" type="float" value="1420"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="3060"/>
     <property name="topY" type="float" value="0"/>
     <property name="velocity" type="float" value="75"/>
@@ -289,6 +296,7 @@
    <properties>
     <property name="bottomY" type="float" value="1930"/>
     <property name="leftX" type="float" value="0"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="0"/>
     <property name="topY" type="float" value="1030"/>
     <property name="velocity" type="float" value="75"/>
@@ -299,6 +307,7 @@
    <properties>
     <property name="bottomY" type="float" value="0"/>
     <property name="leftX" type="float" value="658.82"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="2150"/>
     <property name="topY" type="float" value="0"/>
     <property name="velocity" type="float" value="75"/>
@@ -309,6 +318,7 @@
    <properties>
     <property name="bottomY" type="float" value="0"/>
     <property name="leftX" type="float" value="80.31"/>
+    <property name="playerSeen" type="bool" value="false"/>
     <property name="rightX" type="float" value="750"/>
     <property name="topY" type="float" value="0"/>
     <property name="velocity" type="float" value="75"/>
