@@ -36,10 +36,46 @@ var level1 = {
 
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
+
+
+
+        // *************** PLAYER *************** //
+        // Add robber character
+        player = game.add.sprite(65, 1140, 'robber');
+        player.frame = 0;
+        
+        // Give robber physics
+        game.physics.arcade.enable(player); 
+
+        // Add animation to player
+        player.animations.add('down', [1, 2, 3, 4], 10, true);
+        player.animations.add('up', [14, 15, 16, 17], 10, true);
+        player.animations.add('right', [9, 10, 11, 12], 10, true);
+        player.animations.add('left', [5, 6, 7, 8], 10, true);      
+
+        // game border collision
+        player.body.collideWorldBounds = true;
+
+        // anchor player
+        player.anchor.setTo(0.5, 0.5);
+
+        // Get camera to follow player
+        game.camera.follow(player);
+        // *************** PLAYER *************** //
+
+
+
+
         WallsAccessories = map.createLayer('WallsAccessories');
+        Collision = map.createLayer('Collision');
 
         // collision with walls and accessories
-        map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
+        //map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
+        map.setCollisionBetween(1, 2000, true, 'Collision');
+        Collision.alpha = 0;
+
+
+
 
         Floor.resizeWorld();
         // *************** MAP *************** //
@@ -69,31 +105,6 @@ var level1 = {
         scoreText.cameraOffset.setTo(0, 0);
         // *************** ITEMS *************** //
 
-
-
-        // *************** PLAYER *************** //
-        // Add robber character
-        player = game.add.sprite(65, 1140, 'robber');
-        player.frame = 0;
-        
-        // Give robber physics
-        game.physics.arcade.enable(player); 
-
-        // Add animation to player
-        player.animations.add('down', [1, 2, 3, 4], 10, true);
-        player.animations.add('up', [14, 15, 16, 17], 10, true);
-        player.animations.add('right', [9, 10, 11, 12], 10, true);
-        player.animations.add('left', [5, 6, 7, 8], 10, true);      
-
-        // game border collision
-        player.body.collideWorldBounds = true;
-
-        // anchor player
-        player.anchor.setTo(0.5, 0.5);
-
-        // Get camera to follow player
-        game.camera.follow(player);
-        // *************** PLAYER *************** //
 
 
 
@@ -144,7 +155,8 @@ var level1 = {
         // Update function
 
         // player collision
-        game.physics.arcade.collide(player, WallsAccessories);
+        //game.physics.arcade.collide(player, WallsAccessories);
+        game.physics.arcade.collide(player, Collision);
 
         game.physics.arcade.overlap(player, items, this.collectMoney, null, this);
 
