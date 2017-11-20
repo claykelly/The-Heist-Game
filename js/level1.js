@@ -15,6 +15,9 @@ var level1 = {
         game.load.image('2dwalls', 'assets/2dwalls.png');
         game.load.image('extra', 'assets/extra.png');
         game.load.image('money', 'assets/money.png');
+        game.load.image('OfficeFurniture', 'assets/OfficeFurniture.png');
+        game.load.image('chair', 'assets/chair.png');
+        game.load.image('tables', 'assets/tables.png');
         game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
 
@@ -33,6 +36,9 @@ var level1 = {
         map.addTilesetImage('accessories_tile');
         map.addTilesetImage('2dwalls');
         map.addTilesetImage('extra');
+        map.addTilesetImage('OfficeFurniture');
+        map.addTilesetImage('chair');
+        map.addTilesetImage('tables');
 
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
@@ -67,6 +73,7 @@ var level1 = {
 
 
         WallsAccessories = map.createLayer('WallsAccessories');
+        WallsAccessories = map.createLayer('WallsAccessories2');
         Collision = map.createLayer('Collision');
 
         // collision with walls and accessories
