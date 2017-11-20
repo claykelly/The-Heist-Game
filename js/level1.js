@@ -314,7 +314,8 @@ var level1 = {
         scoreText.text = 'Money Left: ' + moneyCount;
 
         if (moneyCount === 0) {
-            this.game.state.start("level2");
+            // ******************* Change this back to level 2 when it is working again!!! ******
+            this.game.state.start("level3");
         }
     },
     createGuards: function(group) {

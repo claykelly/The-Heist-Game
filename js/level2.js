@@ -1,5 +1,3 @@
-
-
 // Game state
 
 var level2 = {
