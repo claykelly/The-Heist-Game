@@ -35,18 +35,17 @@ var level2 = {
         // the tileset must be named according to what it is named in the tiled editor
         // (i.e. what you saved/named the tileset as)
         map.addTilesetImage('terrain-assets');
-        //map.addTilesetImage('accessories_tile');
         map.addTilesetImage('2dwalls');
-        //map.addTilesetImage('extra');
-        //map.addTilesetImage('OfficeFurniture');
-        //map.addTilesetImage('chair');
+        map.addTilesetImage('extra');
+        map.addTilesetImage('OfficeFurniture');
+        map.addTilesetImage('chair');
         map.addTilesetImage('tables');
 
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
         
         WallsAccessories = map.createLayer('WallsAccessories');
-        //WallsAccessories = map.createLayer('WallsAccessories2');
+        WallsAccessories = map.createLayer('WallsAccessories2');
         Collision = map.createLayer('Collision');
 
         // collision with walls and accessories
