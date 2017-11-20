@@ -71,9 +71,9 @@ var level3 = {
 
 
 
-
+        Accessories1 = map.createLayer('Accessories1');
         Walls = map.createLayer('Walls');
-        Accessories = map.createLayer('Accessories');
+        Accessories2 = map.createLayer('Accessories2');
         Collision = map.createLayer('Collision');
 
         // collision with walls and accessories
