@@ -190,7 +190,7 @@ var level1 = {
             //game.physics.arcade.collide(ray, WallsAccessories);
 
             // Test if any walls intersect the ray
-            var tileHits = WallsAccessories.getRayCastTiles(ray, 4, false, false);
+            var tileHits = Collision.getRayCastTiles(ray, 4, false, false);
 
             if (tileHits.length > 0 || ray.length > 300) {
                 // A wall is blocking this guards vision or the player is too far
