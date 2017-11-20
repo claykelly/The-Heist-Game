@@ -1,6 +1,6 @@
-
-
 // Game state
+// ***** NOTE ******
+//     THIS LEVEL IS NOT IMPLEMENTED AS OF THE BETA %^&$&^
 
 var level2 = {
 
