@@ -1,3 +1,5 @@
+
+
 // Game state
 
 var level2 = {
@@ -15,6 +17,9 @@ var level2 = {
         game.load.image('2dwalls', 'assets/2dwalls.png');
         game.load.image('extra', 'assets/extra.png');
         game.load.image('money', 'assets/money.png');
+        game.load.image('OfficeFurniture', 'assets/OfficeFurniture.png');
+        game.load.image('chair', 'assets/chair.png');
+        game.load.image('tables', 'assets/tables.png');
         game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
 
@@ -32,14 +37,22 @@ var level2 = {
         map.addTilesetImage('terrain-assets');
         //map.addTilesetImage('accessories_tile');
         map.addTilesetImage('2dwalls');
-        //map.addTilesetImage('extra');
+        map.addTilesetImage('extra');
+        map.addTilesetImage('OfficeFurniture');
+        map.addTilesetImage('chair');
+        map.addTilesetImage('tables');
 
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
+        
         WallsAccessories = map.createLayer('WallsAccessories');
+        WallsAccessories = map.createLayer('WallsAccessories2');
+        Collision = map.createLayer('Collision');
 
         // collision with walls and accessories
-        map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
+        //map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
+        map.setCollisionBetween(1, 2000, true, 'Collision');
+        Collision.alpha = 0;
 
         Floor.resizeWorld();
         // *************** MAP *************** //
@@ -145,7 +158,7 @@ var level2 = {
         // Update function
 
         // player collision
-        game.physics.arcade.collide(player, WallsAccessories);
+        game.physics.arcade.collide(player, Collision);
 
         game.physics.arcade.overlap(player, items, this.collectMoney, null, this);
 
@@ -172,7 +185,7 @@ var level2 = {
             //game.physics.arcade.collide(ray, WallsAccessories);
 
             // Test if any walls intersect the ray
-            var tileHits = WallsAccessories.getRayCastTiles(ray, 4, false, false);
+            var tileHits = Collision.getRayCastTiles(ray, 4, false, false);
 
             if (tileHits.length > 0 || ray.length > 300) {
                 // A wall is blocking this guards vision or the player is too far
