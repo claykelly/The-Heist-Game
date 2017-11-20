@@ -11,7 +11,7 @@ var level2 = {
         // This loads the tilemap from Tiled into phaser. To do this you must export
         // the tiled file as a .json file and then load the .json file as well as all of the
         // tile sets that come with it
-        game.load.tilemap('map2.1', 'assets/map2.1.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('2map', 'assets/2map.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('terrain-assets', 'assets/terrain-assets.png');
         game.load.image('accessories_tile', 'assets/accessories_tile.png');
         game.load.image('2dwalls', 'assets/2dwalls.png');
@@ -29,7 +29,7 @@ var level2 = {
 
         // *************** MAP *************** //
         // Load the map
-        map = game.add.tilemap('map2.1');
+        map = game.add.tilemap('2map');
 
         // Here we must add in all the tilesets that we used in our map.
         // the tileset must be named according to what it is named in the tiled editor
@@ -37,16 +37,16 @@ var level2 = {
         map.addTilesetImage('terrain-assets');
         //map.addTilesetImage('accessories_tile');
         map.addTilesetImage('2dwalls');
-        map.addTilesetImage('extra');
-        map.addTilesetImage('OfficeFurniture');
-        map.addTilesetImage('chair');
+        //map.addTilesetImage('extra');
+        //map.addTilesetImage('OfficeFurniture');
+        //map.addTilesetImage('chair');
         map.addTilesetImage('tables');
 
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
         
         WallsAccessories = map.createLayer('WallsAccessories');
-        WallsAccessories = map.createLayer('WallsAccessories2');
+        //WallsAccessories = map.createLayer('WallsAccessories2');
         Collision = map.createLayer('Collision');
 
         // collision with walls and accessories
