@@ -4,9 +4,12 @@ var gameOver = {
     preload: function() {
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
         game.load.audio('caughtSound', 'assets/sounds/Well_Done_Clapping.ogg');
+        game.load.audio('UISelectionSound', 'assets/sounds/Menu_Selection_Click.wav');
     },
     create: function() {
         game.stage.backgroundColor = "#125ace"
+
+        UISelectionSound = game.add.sound("UISelectionSound");
 
         music = game.sound.play('caughtSound');
 
@@ -18,6 +21,7 @@ var gameOver = {
         gameOverMessage.anchor.setTo(0.5,0.5);
     },    
     playTheGame: function(){
+        UISelectionSound.play();
         music.stop();
         this.game.cache.removeSound('caughtSound');
         this.game.state.start(game.currentLevel);

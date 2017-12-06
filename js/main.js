@@ -9,7 +9,6 @@ game.state.add("mainMenu", mainMenu);
 game.state.add("gameOver", gameOver);
 game.state.add("winScreen", winScreen);
 game.state.add("level1", level1);
-game.state.add("level2", level2);
 game.state.add("level3", level3);
 
 
@@ -17,6 +16,7 @@ game.state.add("level3", level3);
 var cursors;
 var music;
 game.currentLevel = "level1";
+game.isLevel1Completed = false;
 
 // start the the first state
 // each state will end by going to another state after this point

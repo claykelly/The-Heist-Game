@@ -22,6 +22,8 @@ var level1 = {
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
         game.load.audio('level1Music', 'assets/sounds/recent_changes.ogg');
         game.load.audio('moneyCollectionSound', 'assets/sounds/laser1.wav');
+        game.load.audio('menuMusic', 'assets/sounds/nebula.ogg');
+        game.load.audio('UISelectionSound', 'assets/sounds/Menu_Selection_Click.wav');
 
 
     },
@@ -29,6 +31,7 @@ var level1 = {
 
         music = game.sound.play('level1Music');
         moneyCollectionSound = game.add.sound("moneyCollectionSound");
+        UISelectionSound = game.add.sound("UISelectionSound");
 
         // *************** MAP *************** //
         // Load the map
@@ -112,9 +115,18 @@ var level1 = {
             moneyCount += 1;
         }, this);
 
-        scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#ffffff' });
+        scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#9e0e0e' });
         scoreText.fixedToCamera = true;
         scoreText.cameraOffset.setTo(0, 0);
+
+        menuText = game.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#9e0e0e' });
+        menuText.fixedToCamera = true;
+        menuText.cameraOffset.setTo(0, 30);
+        menuButton = this.game.add.button(0, 0, "", this.backToMenu, this);
+        //var level3Button = this.game.add.button(window.innerWidth / 2 + 100,window.innerHeight / 2 + 75, "level3Picture", this.level1NotCompleted, this);
+        menuButton.fixedToCamera = true;
+        menuButton.width = 75;
+        menuButton.cameraOffset.setTo(0, 30);
         // *************** ITEMS *************** //
 
 
@@ -327,7 +339,12 @@ var level1 = {
             music.stop();
             this.game.cache.removeSound('level1Music');
 
-            this.game.state.start("level3");
+            game.isLevel1Completed = true;
+
+            music = game.add.audio('menuMusic');
+            music.play();
+
+            this.game.state.start("mainMenu");
         }
     },
     createGuards: function(group) {
@@ -393,5 +410,15 @@ var level1 = {
 
         // This just tells the engine it should update the texture cache
         this.shadowTexture.dirty = true;
+    },
+    backToMenu: function() {
+        UISelectionSound.play();
+        music.stop();
+        this.game.cache.removeSound('level1Music');
+
+        music = game.add.audio('menuMusic');
+        music.play();
+
+        this.game.state.start("mainMenu");
     }
 }
