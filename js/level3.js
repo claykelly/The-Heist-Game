@@ -20,10 +20,15 @@ var level3 = {
         game.load.image('tables', 'assets/tables.png');
         game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
+        game.load.audio('level3Music', 'assets/sounds/through_space.ogg');
+        game.load.audio('moneyCollectionSound', 'assets/sounds/laser1.wav');
 
 
     },
     create: function() {
+
+        music = game.sound.play('level3Music');
+        moneyCollectionSound = game.add.sound("moneyCollectionSound");
 
         // *************** MAP *************** //
         // Load the map
@@ -220,6 +225,8 @@ var level3 = {
                     // GAME OVER
                     // Go to menu
                     game.currentLevel = "level3";
+                    music.stop();
+                    this.game.cache.removeSound('level3Music');
                     this.game.state.start("gameOver");
                 }          
             }
@@ -306,6 +313,8 @@ var level3 = {
     collectMoney: function(player, money) {
         // collect money in the game
 
+        moneyCollectionSound.play();
+
         // Removes the money from the screen
         money.kill();
 
@@ -314,6 +323,8 @@ var level3 = {
         scoreText.text = 'Money Left: ' + moneyCount;
 
         if (moneyCount === 0) {
+            music.stop();
+            this.game.cache.removeSound('level3Music');
             this.game.state.start("winScreen");
         }
     },

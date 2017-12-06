@@ -15,6 +15,7 @@ game.state.add("level3", level3);
 
 // create global variables 
 var cursors;
+var music;
 game.currentLevel = "level1";
 
 // start the the first state

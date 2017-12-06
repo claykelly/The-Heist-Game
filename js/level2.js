@@ -1,6 +1,4 @@
 // Game state
-// ***** NOTE ******
-//     THIS LEVEL IS NOT IMPLEMENTED AS OF THE BETA %^&$&^
 
 var level2 = {
 
@@ -11,7 +9,7 @@ var level2 = {
         // This loads the tilemap from Tiled into phaser. To do this you must export
         // the tiled file as a .json file and then load the .json file as well as all of the
         // tile sets that come with it
-        game.load.tilemap('2map', 'assets/2map.json', null, Phaser.Tilemap.TILED_JSON);
+        game.load.tilemap('map2', 'assets/2map.json', null, Phaser.Tilemap.TILED_JSON);
         game.load.image('terrain-assets', 'assets/terrain-assets.png');
         game.load.image('accessories_tile', 'assets/accessories_tile.png');
         game.load.image('2dwalls', 'assets/2dwalls.png');
@@ -29,12 +27,13 @@ var level2 = {
 
         // *************** MAP *************** //
         // Load the map
-        map = game.add.tilemap('2map');
+        map = game.add.tilemap('map2');
 
         // Here we must add in all the tilesets that we used in our map.
         // the tileset must be named according to what it is named in the tiled editor
         // (i.e. what you saved/named the tileset as)
         map.addTilesetImage('terrain-assets');
+        map.addTilesetImage('accessories_tile');
         map.addTilesetImage('2dwalls');
         map.addTilesetImage('extra');
         map.addTilesetImage('OfficeFurniture');
@@ -43,49 +42,12 @@ var level2 = {
 
         // the parameter is what the layer is ***called in tiled***
         Floor = map.createLayer('Floor');
-        
-        WallsAccessories = map.createLayer('WallsAccessories');
-        WallsAccessories = map.createLayer('WallsAccessories2');
-        Collision = map.createLayer('Collision');
-
-        // collision with walls and accessories
-        //map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
-        map.setCollisionBetween(1, 2000, true, 'Collision');
-        Collision.alpha = 0;
-
-        Floor.resizeWorld();
-        // *************** MAP *************** //
-
-
-
-
-
-        // *************** ITEMS *************** //
-        moneyCount = 0;
-
-        items = game.add.group();
-        items.enableBody = true;
-        
-        // creates money from tiled map, the "1047" is the grid: property ID from the map1.JASON file
-        // it selects all the object we placed down that are "cops" keep everything else
-        // the same to add new objects except obviously the group
-        map.createFromObjects('ObjectLayer', 987, 'money', 0, true, false, items);
-
-        // count how many dollars are on the map for the game over condition
-        items.forEach( function(item) {
-            moneyCount += 1;
-        }, this);
-
-        scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#ffffff' });
-        scoreText.fixedToCamera = true;
-        scoreText.cameraOffset.setTo(0, 0);
-        // *************** ITEMS *************** //
 
 
 
         // *************** PLAYER *************** //
         // Add robber character
-        player = game.add.sprite(2308, 2963, 'robber');
+        player = game.add.sprite(65, 1140, 'robber');
         player.frame = 0;
         
         // Give robber physics
@@ -109,6 +71,50 @@ var level2 = {
 
 
 
+
+        WallsAccessories = map.createLayer('WallsAccessories');
+        WallsAccessories = map.createLayer('WallsAccessories2');
+        Collision = map.createLayer('Collision');
+
+        // collision with walls and accessories
+        //map.setCollisionBetween(1, 2000, true, 'WallsAccessories');
+        map.setCollisionBetween(1, 2000, true, 'Collision');
+        Collision.alpha = 0;
+
+
+
+
+        Floor.resizeWorld();
+        // *************** MAP *************** //
+
+
+
+
+
+        // *************** ITEMS *************** //
+        moneyCount = 0;
+
+        items = game.add.group();
+        items.enableBody = true;
+        
+        // creates money from tiled map, the "1047" is the grid: property ID from the map1.JASON file
+        // it selects all the object we placed down that are "cops" keep everything else
+        // the same to add new objects except obviously the group
+        map.createFromObjects('ObjectLayer', 1047, 'money', 0, true, false, items);
+
+        // count how many dollars are on the map for the game over condition
+        items.forEach( function(item) {
+            moneyCount += 1;
+        }, this);
+
+        scoreText = game.add.text(400, 1120, 'Money Left: '+ moneyCount, { fontSize: '32px', fill: '#ffffff' });
+        scoreText.fixedToCamera = true;
+        scoreText.cameraOffset.setTo(0, 0);
+        // *************** ITEMS *************** //
+
+
+
+
         // *************** GUARDS *************** //
         // Add test security guards for detection testing
         // We should make this into a function in order to make
@@ -116,7 +122,7 @@ var level2 = {
         guards = game.add.group();
         guards.enableBody = true;
 
-        map.createFromObjects('ObjectLayer', 186, 'cop', 0, true, false, guards);
+        map.createFromObjects('ObjectLayer', 1041, 'cop', 0, true, false, guards);
 
         // the guards are already placed by tiled we just need to set each guard's velocity
         this.createGuards(guards);
@@ -130,7 +136,6 @@ var level2 = {
         bitmap.context.strokeStyle = 'rgb(255, 255, 255)';
         game.add.image(0, 0, bitmap);
         // *************** RAYCASTING *************** //
-
 
 
         // *************** SHADOW *************** //
@@ -157,6 +162,7 @@ var level2 = {
         // Update function
 
         // player collision
+        //game.physics.arcade.collide(player, WallsAccessories);
         game.physics.arcade.collide(player, Collision);
 
         game.physics.arcade.overlap(player, items, this.collectMoney, null, this);
@@ -200,12 +206,14 @@ var level2 = {
                     this.shadowTexture.dirty = true;
                 }
 
+
             } else {
                 // This guard can see the player
                 guard.playerSeen = true;
 
                 // draw guards vision circle
                 this.updateShadowTexture(guard);
+
 
                 // Player is too close to the guard so they are "caught"
                 if (ray.length < 150) {
@@ -306,6 +314,7 @@ var level2 = {
         scoreText.text = 'Money Left: ' + moneyCount;
 
         if (moneyCount === 0) {
+            // ******************* Change this back to level 2 when it is working again!!! ******
             this.game.state.start("level3");
         }
     },

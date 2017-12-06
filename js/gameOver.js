@@ -3,9 +3,12 @@
 var gameOver = {
     preload: function() {
         game.load.spritesheet('cop', 'assets/cop.png', 32, 48, 18);
+        game.load.audio('caughtSound', 'assets/sounds/Well_Done_Clapping.ogg');
     },
     create: function() {
         game.stage.backgroundColor = "#125ace"
+
+        music = game.sound.play('caughtSound');
 
 		var playButton = this.game.add.button(window.innerWidth / 2,window.innerHeight / 2, "cop", this.playTheGame, this);
         playButton.anchor.setTo(0.5,0.5);
@@ -15,6 +18,8 @@ var gameOver = {
         gameOverMessage.anchor.setTo(0.5,0.5);
     },    
     playTheGame: function(){
+        music.stop();
+        this.game.cache.removeSound('caughtSound');
         this.game.state.start(game.currentLevel);
     }
 }

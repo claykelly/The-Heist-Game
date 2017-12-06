@@ -3,6 +3,7 @@
 var mainMenu = {
     preload: function() {
         game.load.spritesheet('robber', 'assets/robber_two.png', 32, 48, 18);
+        game.load.audio('UISelectionSound', 'assets/sounds/Menu_Selection_Click.wav');
     },
     create: function() {
         game.stage.backgroundColor = "#888888"
@@ -15,8 +16,13 @@ var mainMenu = {
         topMessage.anchor.setTo(0.5,0.5);
         var topMessage2 = this.game.add.text(window.innerWidth / 2,window.innerHeight / 2 - 50, "Don't get too close to the guards!");
         topMessage2.anchor.setTo(0.5,0.5);
+
+        UISelectionSound = game.add.sound("UISelectionSound");
     },    
     playTheGame: function(){
+        UISelectionSound.play();
+        music.stop();
+        this.game.cache.removeSound('menuMusic');
         this.game.state.start("level1");
     }
 }

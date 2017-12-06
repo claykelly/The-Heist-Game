@@ -3,6 +3,8 @@
 var load = {
     preload: function() {
         game.load.image('logo', 'assets/logo.png');
+        game.load.audio('menuMusic', 'assets/sounds/nebula.ogg');
+        game.load.audio('UISelectionSound', 'assets/sounds/Menu_Selection_Click.wav');
     },
 
     create: function() {
@@ -18,10 +20,15 @@ var load = {
         var style = { fill: "#ffffff", align: "center" };
         var message = this.game.add.text(window.innerWidth / 2 - 50,window.innerHeight / 2 - 250, "Click to start", style);
 
+        music = game.add.audio('menuMusic');
+        music.play();
+        UISelectionSound = game.add.sound("UISelectionSound");
+
     },    
 
     startgame: function(){
         
+        UISelectionSound.play();
         this.game.state.start("mainMenu");
     }
 }
